@@ -2,7 +2,7 @@
 
 This repository contains scripts and instructions for setting up an Uptime Kuma Push Agent. Once you have added a push device in Uptime Kuma, you can use this repository to monitor network uptime and send results to your Uptime Kuma server. The agent is designed to run on both non-embedded systems (such as desktops and servers) and embedded systems (such as IoT devices and routers).
 
-## Project Setup and Usage for non-embedded systems
+## Python implementation - Project Setup and Usage
 
 Below are instructions on how to use and deploy program.py on non-embedded systems (desktops and servers).
 
@@ -114,6 +114,65 @@ Enter the following line to run the script every minute:
 Schedule executable using Task Scheduler on Synology NAS:
 
 ...
+
+### Tested Systems
+
+* Windows 11 (Build ..)
+* Ubuntu Desktop 22.04
+* Raspberry Pi 4 (version ..)
+* Synology NAS (DSM7.4)
+
+
+
+## Go implementation - Project Setup and Usage
+
+Below are instructions on how to use and deploy program.go on non-embedded systems (desktops and servers).
+
+### Prerequisites
+
+- Golang installed on you development computer (https://go.dev/dl/)
+
+### Get Source Script
+
+Use git clone of this repository or copy program.go to your machine (non-embedded system).
+
+### Building the Executable
+
+To build the project into a standalone executable:
+
+```bash
+go build -o program program.go
+```
+
+### Testing the Script
+
+To test the script, run the following command:
+
+```bash
+./program --isp "1.1.1.1" --base_url "https://monitoring.example.com/api/push/XXXXXX"
+```
+
+This example will ping the ISP server at `8.8.8.8` and send the results to the specified URL every 60 seconds.
+
+```bash
+./program --isp "8.8.8.8" --base_url "https://monitoring.example.com/api/push/XXXXXX" --interval 60
+```
+
+### Deployment
+
+Schedule executable using crontab:
+
+Use crontab to schedule the executable:
+
+```bash
+crontab -e
+```
+
+Enter the following line to run the script every minute:
+
+```bash
+* * * * * /root/program --isp "1.1.1.1" --base_url "https://monitoring.example.com/api/push/XXXXXX"
+```
 
 ### Tested Systems
 
